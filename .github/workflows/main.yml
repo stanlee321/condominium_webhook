@@ -28,4 +28,4 @@ jobs:
         with:
           context: .  # make sure your Dockerfile for Rust is here
           push: true
-          tags: ${{ vars.DOCKER_HUB_USERNAME }}/my_rust_project:${{ github.ref_name }}
+          tags: ${{ vars.DOCKER_HUB_USERNAME }}/condominium_webhook:${{ github.ref_name }}
