@@ -1,10 +1,11 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image for Rust
 
 on:
   push:
     branches:
       - main
       - develop
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,16 +19,13 @@ jobs:
         with:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      # Build with support for multiple architectures
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v1
-
-      - name: Build and Push
+      - name: Build and Push Rust Image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: .  # make sure your Dockerfile for Rust is here
           push: true
-          tags: ${{ vars.DOCKER_HUB_USERNAME }}/condominium_webhook:${{ github.ref_name }}
+          tags: ${{ vars.DOCKER_HUB_USERNAME }}/my_rust_project:${{ github.ref_name }}
